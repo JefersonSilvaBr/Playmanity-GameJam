@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/test.png" type="Texture" id=1]
+[ext_resource path="res://world/UI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/effects/spawn.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/characters/player/player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/effects/updates.tscn" type="PackedScene" id=5]
+[ext_resource path="res://world/cenes.gd" type="Script" id=6]
+[ext_resource path="res://entities/effects/gate.tscn" type="PackedScene" id=7]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="TileSet" id=2]
+0/name = "test.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 1 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "test.png 1"
+1/texture = ExtResource( 1 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 16, 0, 16, 16 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
+[node name="Cenes" type="Node2D"]
+script = ExtResource( 6 )
+spawns_iimit = 10
+
+[node name="Gate3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 40, 328 )
+
+[node name="Gate2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 72, 328 )
+
+[node name="Gate" parent="." instance=ExtResource( 7 )]
+position = Vector2( 56, 328 )
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2( 16, 16 )
+tile_set = SubResource( 2 )
+cell_size = Vector2( 16, 16 )
+cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
+format = 1
+tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, -65525, 0, 0, -65524, 0, 0, -65523, 0, 0, -65522, 0, 0, -65521, 0, 0, -65520, 0, 0, -65519, 0, 0, -65518, 0, 0, -65517, 0, 0, -65516, 0, 0, -65515, 0, 0, -65514, 0, 0, 65535, 0, 0, 22, 0, 0, 131071, 0, 0, 65558, 0, 0, 196607, 0, 0, 131094, 0, 0, 262143, 0, 0, 196630, 0, 0, 327679, 0, 0, 262166, 0, 0, 393215, 0, 0, 327702, 0, 0, 458751, 0, 0, 393238, 0, 0, 524287, 0, 0, 458774, 0, 0, 589823, 0, 0, 524310, 0, 0, 655359, 0, 0, 589846, 0, 0, 720895, 0, 0, 655382, 0, 0, 786431, 0, 0, 720918, 0, 0, 851967, 0, 0, 786454, 0, 0, 917503, 0, 0, 851990, 0, 0, 983039, 0, 0, 917526, 0, 0, 1048575, 0, 0, 983062, 0, 0, 1114111, 0, 0, 1048598, 0, 0, 1179647, 0, 0, 1114134, 0, 0, 1245183, 0, 0, 1179670, 0, 0, 1310719, 0, 0, 1245184, 0, 0, 1245188, 0, 0, 1245189, 0, 0, 1245190, 0, 0, 1245191, 0, 0, 1245192, 0, 0, 1245193, 0, 0, 1245194, 0, 0, 1245195, 0, 0, 1245196, 0, 0, 1245197, 0, 0, 1245198, 0, 0, 1245199, 0, 0, 1245200, 0, 0, 1245201, 0, 0, 1245202, 0, 0, 1245203, 0, 0, 1245204, 0, 0, 1245205, 0, 0, 1245206, 0, 0 )
+
+[node name="Updates" parent="." instance=ExtResource( 5 )]
+position = Vector2( 333, 286 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( 177, 162 )
+
+[node name="Spawn" parent="." instance=ExtResource( 3 )]
+position = Vector2( 199, -16 )
+
+[node name="Spawn2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 402, 66 )
+
+[node name="Spawn3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 349, 354 )
+
+[node name="Spawn4" parent="." instance=ExtResource( 3 )]
+position = Vector2( -17, 203 )
+
+[node name="UI" parent="." instance=ExtResource( 2 )]

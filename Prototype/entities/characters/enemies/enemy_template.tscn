@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://entities/characters/enemies/enemy_template.gd" type="Script" id=1]
+[ext_resource path="res://entities/characters/enemies/enemy_state.gd" type="Script" id=2]
+
+[node name="EnemyTemplate" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 1 )
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+
+[node name="Animated" type="AnimationPlayer" parent="."]
+root_node = NodePath("Sprite")
+
+[node name="Sprite" type="Sprite" parent="Animated"]
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+
+[node name="Collider" type="CollisionShape2D" parent="HurtBox"]
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="Collider" type="CollisionShape2D" parent="HitBox"]
+
+[node name="State" type="Node2D" parent="."]
+script = ExtResource( 2 )
+life = 2.0
+speed = 15.0
+cooldown = 1.0

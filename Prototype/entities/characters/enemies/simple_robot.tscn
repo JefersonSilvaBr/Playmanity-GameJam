@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/test.png" type="Texture" id=1]
+[ext_resource path="res://entities/characters/enemies/enemy_template.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/characters/enemies/simple_robot.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 5.0
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 6.0
+
+[node name="SimpleRobot" instance=ExtResource( 2 )]
+collision_mask = 4
+script = ExtResource( 3 )
+
+[node name="Collider" parent="." index="0"]
+modulate = Color( 0, 0, 0, 1 )
+shape = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+texture = ExtResource( 1 )
+hframes = 6
+frame = 2
+
+[node name="Animated" parent="." index="2"]
+root_node = NodePath("../Sprite")
+reset_on_save = false
+anims/RESET = SubResource( 4 )
+
+[node name="HurtBox" parent="." index="3"]
+collision_layer = 0
+collision_mask = 32
+monitoring = true
+monitorable = false
+
+[node name="Collider" parent="HurtBox" index="0"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 0, 1 )
+shape = SubResource( 6 )
+
+[node name="HitBox" parent="." index="4"]
+collision_layer = 16
+collision_mask = 10
+monitorable = true
+
+[node name="Collider" parent="HitBox" index="0"]
+shape = SubResource( 7 )
+
+[node name="State" parent="." index="5"]
+life = 4.0
+
+[connection signal="body_entered" from="HurtBox" to="." method="_on_HurtBox_body_entered"]
